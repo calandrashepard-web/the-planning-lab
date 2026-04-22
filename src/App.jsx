@@ -556,12 +556,17 @@ const WelcomeScreen = ({ onStart }) => {
       <div style={{ marginTop: 24, display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
         <span style={{ fontSize: 13, color: "rgba(255,255,255,0.45)" }}>Built by <span style={{ color: "#fff", fontWeight: 600 }}>Callie Shepard</span></span>
         <span style={{ color: "rgba(255,255,255,0.15)", fontSize: 13 }}>|</span>
+        <a href="https://callieplans.com" target="_blank" rel="noopener noreferrer"
+          style={{ fontSize: 13, color: "#95d5b2", textDecoration: "none", fontWeight: 600 }}>
+          Portfolio →
+        </a>
+        <span style={{ color: "rgba(255,255,255,0.15)", fontSize: 13 }}>|</span>
         <a href="https://www.linkedin.com/in/callie-shepard" target="_blank" rel="noopener noreferrer"
           style={{ fontSize: 13, color: "#95d5b2", textDecoration: "none", fontWeight: 600 }}>
           LinkedIn →
         </a>
         <span style={{ color: "rgba(255,255,255,0.15)", fontSize: 13 }}>|</span>
-        <a href="mailto:calandra.shepard@gmail.com"
+        <a href="mailto:callie@callieplans.com"
           style={{ fontSize: 13, color: "#95d5b2", textDecoration: "none", fontWeight: 600 }}>
           Get in touch →
         </a>
@@ -2181,16 +2186,33 @@ const FinalScorecard = ({ scores, industry, onRestart }) => {
           <img src={HEADSHOT} alt="Callie Shepard" style={{ width: 120, height: 120, borderRadius: "50%", objectFit: "cover", border: "2px solid rgba(149,213,178,0.3)", flexShrink: 0 }} />
           <div style={{ flex: "1 1 240px", minWidth: 0 }}>
             <div style={{ fontSize: 18, fontWeight: 700, color: "#fff", fontFamily: "'Fraunces', serif", marginBottom: 4 }}>Callie Shepard</div>
-            <div style={{ fontSize: 13, color: "rgba(255,255,255,0.55)", marginBottom: 12, lineHeight: 1.6 }}>
+            <div style={{ fontSize: 13, color: "rgba(255,255,255,0.55)", marginBottom: 16, lineHeight: 1.6 }}>
               Planning leader with 10+ years of experience across fashion, CPG, and wellness brands. Passionate about building planning infrastructure, mentoring emerging talent, and leveraging data to drive smarter inventory decisions.
             </div>
+            <a href="https://callieplans.com" target="_blank" rel="noopener noreferrer"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                fontSize: 14,
+                fontWeight: 700,
+                color: "#1b4332",
+                background: "#95d5b2",
+                padding: "10px 18px",
+                borderRadius: 8,
+                textDecoration: "none",
+                fontFamily: "'DM Sans', sans-serif",
+                marginBottom: 14,
+              }}>
+              Visit my portfolio →
+            </a>
             <div style={{ display: "flex", gap: 16, flexWrap: "wrap", alignItems: "center" }}>
               <a href="https://www.linkedin.com/in/callie-shepard" target="_blank" rel="noopener noreferrer"
                 style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 13, color: "#95d5b2", textDecoration: "none", fontWeight: 600 }}>
                 Connect on LinkedIn →
               </a>
               <span style={{ color: "rgba(255,255,255,0.2)", fontSize: 13 }}>|</span>
-              <a href="mailto:calandra.shepard@gmail.com"
+              <a href="mailto:callie@callieplans.com"
                 style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 13, color: "#95d5b2", textDecoration: "none", fontWeight: 600 }}>
                 Get in touch →
               </a>
@@ -2199,6 +2221,71 @@ const FinalScorecard = ({ scores, industry, onRestart }) => {
         </div>
       </div>
 
+      <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
+        <Button primary onClick={onRestart}>Play Again</Button>
+        <Button onClick={() => setShowShare((s) => !s)}>{showShare ? "Hide Share ▲" : "Share Your Score ▼"}</Button>
+      </div>
+
+      {showShare && (
+        <div style={{
+          marginTop: 16,
+          padding: "18px 20px",
+          background: "rgba(255,255,255,0.03)",
+          border: "1px solid rgba(149,213,178,0.2)",
+          borderRadius: 12,
+          animation: "totalPop 0.35s ease-out",
+        }}>
+          {shareImageUrl && (
+            <div style={{ marginBottom: 16, textAlign: "center" }}>
+              <img src={shareImageUrl} alt="Your score card" style={{ maxWidth: "100%", borderRadius: 8, border: "1px solid rgba(149,213,178,0.15)" }} />
+              <div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", marginTop: 6, fontFamily: "'DM Mono', monospace" }}>Preview of your share card</div>
+            </div>
+          )}
+
+          <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
+            <button onClick={handleDownload} style={{
+              background: "rgba(64,145,108,0.15)",
+              border: "1px solid rgba(149,213,178,0.3)",
+              color: "#95d5b2",
+              padding: "10px 18px",
+              borderRadius: 8,
+              fontSize: 13,
+              fontWeight: 600,
+              fontFamily: "'DM Sans', sans-serif",
+              cursor: "pointer",
+              transition: "all 0.2s ease",
+            }}>⬇ Download Image</button>
+
+            <button onClick={handleCopyLink} style={{
+              background: "rgba(64,145,108,0.15)",
+              border: "1px solid rgba(149,213,178,0.3)",
+              color: "#95d5b2",
+              padding: "10px 18px",
+              borderRadius: 8,
+              fontSize: 13,
+              fontWeight: 600,
+              fontFamily: "'DM Sans', sans-serif",
+              cursor: "pointer",
+              transition: "all 0.2s ease",
+              minWidth: 130,
+            }}>{copyStatus || "🔗 Copy Link"}</button>
+
+            <button onClick={handleLinkedInShare} style={{
+              background: "rgba(64,145,108,0.15)",
+              border: "1px solid rgba(149,213,178,0.3)",
+              color: "#95d5b2",
+              padding: "10px 18px",
+              borderRadius: 8,
+              fontSize: 13,
+              fontWeight: 600,
+              fontFamily: "'DM Sans', sans-serif",
+              cursor: "pointer",
+              transition: "all 0.2s ease",
+            }}>in Share on LinkedIn</button>
+          </div>
+        </div>
+      )}
+
       {/* Email Capture */}
       {emailStatus !== "sent" ? (
         <div style={{
@@ -2206,7 +2293,7 @@ const FinalScorecard = ({ scores, industry, onRestart }) => {
           border: "1px solid rgba(149,213,178,0.15)",
           borderRadius: 12,
           padding: "18px 24px",
-          marginBottom: 28,
+          marginTop: 28,
           textAlign: "center",
         }}>
           <div style={{ fontSize: 14, color: "rgba(255,255,255,0.7)", marginBottom: 4, fontWeight: 500 }}>Stay connected</div>
@@ -2277,78 +2364,13 @@ const FinalScorecard = ({ scores, industry, onRestart }) => {
           border: "1px solid rgba(149,213,178,0.25)",
           borderRadius: 12,
           padding: "16px 24px",
-          marginBottom: 28,
+          marginTop: 28,
           textAlign: "center",
           fontSize: 13,
           color: "#95d5b2",
           fontWeight: 500,
         }}>
           Thanks for subscribing! You'll hear from me soon.
-        </div>
-      )}
-
-      <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-        <Button primary onClick={onRestart}>Play Again</Button>
-        <Button onClick={() => setShowShare((s) => !s)}>{showShare ? "Hide Share ▲" : "Share Your Score ▼"}</Button>
-      </div>
-
-      {showShare && (
-        <div style={{
-          marginTop: 16,
-          padding: "18px 20px",
-          background: "rgba(255,255,255,0.03)",
-          border: "1px solid rgba(149,213,178,0.2)",
-          borderRadius: 12,
-          animation: "totalPop 0.35s ease-out",
-        }}>
-          {shareImageUrl && (
-            <div style={{ marginBottom: 16, textAlign: "center" }}>
-              <img src={shareImageUrl} alt="Your score card" style={{ maxWidth: "100%", borderRadius: 8, border: "1px solid rgba(149,213,178,0.15)" }} />
-              <div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", marginTop: 6, fontFamily: "'DM Mono', monospace" }}>Preview of your share card</div>
-            </div>
-          )}
-
-          <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
-            <button onClick={handleDownload} style={{
-              background: "rgba(64,145,108,0.15)",
-              border: "1px solid rgba(149,213,178,0.3)",
-              color: "#95d5b2",
-              padding: "10px 18px",
-              borderRadius: 8,
-              fontSize: 13,
-              fontWeight: 600,
-              fontFamily: "'DM Sans', sans-serif",
-              cursor: "pointer",
-              transition: "all 0.2s ease",
-            }}>⬇ Download Image</button>
-
-            <button onClick={handleCopyLink} style={{
-              background: "rgba(64,145,108,0.15)",
-              border: "1px solid rgba(149,213,178,0.3)",
-              color: "#95d5b2",
-              padding: "10px 18px",
-              borderRadius: 8,
-              fontSize: 13,
-              fontWeight: 600,
-              fontFamily: "'DM Sans', sans-serif",
-              cursor: "pointer",
-              transition: "all 0.2s ease",
-              minWidth: 130,
-            }}>{copyStatus || "🔗 Copy Link"}</button>
-
-            <button onClick={handleLinkedInShare} style={{
-              background: "rgba(64,145,108,0.15)",
-              border: "1px solid rgba(149,213,178,0.3)",
-              color: "#95d5b2",
-              padding: "10px 18px",
-              borderRadius: 8,
-              fontSize: 13,
-              fontWeight: 600,
-              fontFamily: "'DM Sans', sans-serif",
-              cursor: "pointer",
-              transition: "all 0.2s ease",
-            }}>in Share on LinkedIn</button>
-          </div>
         </div>
       )}
     </div>
@@ -2376,7 +2398,7 @@ The Planning Lab is provided "as is" for demonstration purposes. The scenarios, 
 Ellery St. and Basecamp Nutrition are fictional brands created for this simulator. Any resemblance to real companies is coincidental.
 
 6. CONTACT
-For permissions, inquiries, or licensing requests, please contact calandra.shepard@gmail.com.
+For permissions, inquiries, or licensing requests, please contact callie@callieplans.com.
 
 © 2026 Callie Shepard. All rights reserved.`;
 
@@ -2579,6 +2601,15 @@ const Footer = ({ onOpenTerms, onOpenGlossary }) => (
   }}>
     <div>© 2026 Callie Shepard. All rights reserved.</div>
     <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
+      <a href="https://callieplans.com" target="_blank" rel="noopener noreferrer" style={{
+        color: "rgba(149,213,178,0.6)",
+        textDecoration: "none",
+        fontSize: 11, fontFamily: "'DM Mono', monospace", letterSpacing: 0.5,
+      }}
+      onMouseEnter={(e) => e.currentTarget.style.color = "#95d5b2"}
+      onMouseLeave={(e) => e.currentTarget.style.color = "rgba(149,213,178,0.6)"}
+      >callieplans.com</a>
+      <span style={{ color: "rgba(255,255,255,0.15)" }}>|</span>
       <button onClick={onOpenGlossary} style={{
         background: "transparent", border: "none",
         color: "rgba(149,213,178,0.6)", cursor: "pointer",
